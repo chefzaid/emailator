@@ -4,17 +4,19 @@ import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Address;
+import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emailator.beans.BulkEmail;
 import com.emailator.beans.Email;
+import com.emailator.beans.SmtpConfiguration;
 import com.emailator.utils.Constants;
 
 import lombok.extern.apachecommons.CommonsLog;
@@ -22,25 +24,34 @@ import lombok.extern.apachecommons.CommonsLog;
 @CommonsLog
 @Service
 public class EmailClient {
-	
-	@Autowired
-	private ConfigurationLoader configuration;
-	
+
 	public boolean send(BulkEmail bulkEmail){
-		log.info("Trying to send email");
+		log.info("Trying to send email...");
 		boolean isSuccessfullySent = true;
 		try {
-			Email email = bulkEmail.getEmail();
-			Address sender = new InternetAddress(email.getSender());
+			SmtpConfiguration smtpConf = bulkEmail.getSmtpConfiguration();
 			Properties props = System.getProperties();
-			props.put(Constants.KEY_SMTP_HOST, configuration.getProperty(Constants.KEY_SMTP_HOST));
-			Session session = Session.getDefaultInstance(props, null);
+			props.put(Constants.KEY_SMTP_HOST, smtpConf.getHost());
+			props.put(Constants.KEY_SMTP_TLS_ENABLE, smtpConf.getEnableStartTls());
+			if(smtpConf.getPort() != null){
+				props.put(Constants.KEY_SMTP_PORT, smtpConf.getPort());	
+			}
+			
+			Authenticator auth = null; 
+			if(smtpConf.getEnableAuthentication() == Boolean.TRUE){
+				auth	= new Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(smtpConf.getUsername(), smtpConf.getPassword());
+					}
+				};
+			}
+			Session session = Session.getDefaultInstance(props, auth);
 
+			Email email = bulkEmail.getEmail();
 			Message msg = new MimeMessage(session);
-			msg.setFrom(sender);
+			msg.setFrom(new InternetAddress(email.getSender()));
 			msg.setSubject(email.getSubject());
 			msg.setText(email.getBody());
-			msg.setHeader("X-Mailer", "Emailator");
 			msg.setSentDate(new Date());
 			// TODO attached files
 			
@@ -51,7 +62,6 @@ public class EmailClient {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			isSuccessfullySent = false;
 			log.error("Error while sending an email", e);
 		}

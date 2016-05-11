@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class BulkEmail {
-	private List<String> recipients;
+	private SmtpConfiguration smtpConfiguration;
 	private Email email;
-
+	private List<String> recipients;
 }
