@@ -1,4 +1,4 @@
-package com.emailator;
+package com.emailator.bulksender;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;

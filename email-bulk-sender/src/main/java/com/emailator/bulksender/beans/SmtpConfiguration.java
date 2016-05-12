@@ -1,4 +1,4 @@
-package com.emailator.beans;
+package com.emailator.bulksender.beans;
 
 import lombok.Data;
 

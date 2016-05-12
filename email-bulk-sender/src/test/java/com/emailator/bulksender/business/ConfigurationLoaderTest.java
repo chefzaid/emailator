@@ -1,4 +1,4 @@
-package com.emailator.business;
+package com.emailator.bulksender.business;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,9 +8,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.emailator.EmailBulkSenderApplication;
-import com.emailator.business.ConfigurationLoader;
-import com.emailator.utils.Constants;
+import com.emailator.bulksender.EmailBulkSenderApplication;
+import com.emailator.bulksender.business.ConfigurationLoader;
+import com.emailator.bulksender.utils.Constants;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)

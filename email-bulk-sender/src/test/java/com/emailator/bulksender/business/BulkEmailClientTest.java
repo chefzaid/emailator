@@ -1,4 +1,4 @@
-package com.emailator.business;
+package com.emailator.bulksender.business;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +11,19 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.emailator.EmailBulkSenderApplication;
-import com.emailator.beans.BulkEmail;
-import com.emailator.beans.Email;
-import com.emailator.beans.SmtpConfiguration;
+import com.emailator.bulksender.EmailBulkSenderApplication;
+import com.emailator.bulksender.beans.BulkEmail;
+import com.emailator.bulksender.beans.Email;
+import com.emailator.bulksender.beans.SmtpConfiguration;
+import com.emailator.bulksender.business.BulkEmailClient;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
 @WebAppConfiguration
-public class EmailClientTest {
+public class BulkEmailClientTest {
 	
 	@Autowired
-	private EmailClient emailClient;
+	private BulkEmailClient emailClient;
 
 	@Test
 	public void testSendViaGmailSuccess() {

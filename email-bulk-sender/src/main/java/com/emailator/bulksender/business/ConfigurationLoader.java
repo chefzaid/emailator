@@ -1,4 +1,4 @@
-package com.emailator.business;
+package com.emailator.bulksender.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import com.emailator.utils.Constants;
+import com.emailator.bulksender.utils.Constants;
 
 @Component
 @Configuration

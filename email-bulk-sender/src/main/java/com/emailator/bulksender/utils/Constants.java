@@ -1,4 +1,4 @@
-package com.emailator.utils;
+package com.emailator.bulksender.utils;
 
 public interface Constants {
 	String KEY_RESOURCES_PATH = "app.resources.default.path";
