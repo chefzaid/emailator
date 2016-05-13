@@ -2,6 +2,7 @@ package com.emailator.bulksender.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -47,6 +48,7 @@ public class BulkEmailClientTest {
 		recipients.add("c.zaid@live.fr");
 		
 		BulkEmail bulkEmail = new BulkEmail();
+		bulkEmail.setBulkEmailId(UUID.randomUUID().toString());
 		bulkEmail.setEmail(email);
 		bulkEmail.setSmtpConfiguration(smtpConf);
 		bulkEmail.setRecipients(recipients);

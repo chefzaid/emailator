@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.service.BulkEmailService;
 
+import lombok.extern.apachecommons.CommonsLog;
+
 @Path("")
+@CommonsLog
 public class BulkEmailRest {
 
 	@Autowired
@@ -21,6 +24,7 @@ public class BulkEmailRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public void sendEmail(BulkEmail bulkEmail) {
+		log.debug("Sending...");
 		// TODO: REST conf + logs + exception management
 		bulkEmailService.send(bulkEmail);
 	}

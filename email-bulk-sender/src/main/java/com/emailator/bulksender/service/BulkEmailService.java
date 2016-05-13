@@ -9,7 +9,10 @@ import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.business.BulkEmailClient;
 import com.emailator.bulksender.dao.BulkEmailDao;
 
+import lombok.extern.apachecommons.CommonsLog;
+
 @Service
+@CommonsLog
 public class BulkEmailService {
 	
 	@Autowired
@@ -18,6 +21,7 @@ public class BulkEmailService {
 	private BulkEmailClient bulkEmailClient;
 
 	public void send(BulkEmail bulkEmail) {
+		log.debug("Saving and sending...");
 		// TODO Manage exceptions + logs
 		// Set bulkEmail ID
 		String bulkEmailId = UUID.randomUUID().toString();

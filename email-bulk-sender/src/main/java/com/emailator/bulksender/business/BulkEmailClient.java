@@ -30,7 +30,7 @@ import lombok.extern.apachecommons.CommonsLog;
 public class BulkEmailClient {
 
 	public boolean send(BulkEmail bulkEmail) {
-		log.info("Trying to send email [{" + bulkEmail.getId() + "}]");
+		log.info("Trying to send email [{" + bulkEmail.getBulkEmailId() + "}]");
 		boolean isSuccessfullySent = true;
 		try {
 			// Set SMTP server configuration
@@ -60,20 +60,23 @@ public class BulkEmailClient {
 			msg.setSubject(email.getSubject());
 			msg.setSentDate(new Date());
 
+			// Init Message content
 			Multipart multipart = new MimeMultipart();
+			msg.setContent(multipart);
 
 			// Add message body
 			MimeBodyPart messageBodyPart = new MimeBodyPart();
 			messageBodyPart.setContent(email.getBody(), MediaType.TEXT_HTML);
 			multipart.addBodyPart(messageBodyPart);
 
-			// Add attachments
-			for (String attachmentFilePath : email.getAttachmentsPaths()) {
-				MimeBodyPart attachmentPart = new MimeBodyPart();
-				attachmentPart.attachFile(attachmentFilePath);
-				multipart.addBodyPart(attachmentPart);
+			// Add attachments (if any)
+			if (email.getAttachmentsPaths() != null) {
+				for (String attachmentFilePath : email.getAttachmentsPaths()) {
+					MimeBodyPart attachmentPart = new MimeBodyPart();
+					attachmentPart.attachFile(attachmentFilePath);
+					multipart.addBodyPart(attachmentPart);
+				}
 			}
-			msg.setContent(multipart);
 
 			// Add and send to recipients, one by one
 			for (String recipient : bulkEmail.getRecipients()) {

@@ -8,18 +8,22 @@ import org.springframework.stereotype.Component;
 
 import com.emailator.bulksender.utils.Constants;
 
+import lombok.extern.apachecommons.CommonsLog;
+
 @Component
 @Configuration
-@PropertySource({
-	"classpath:mail.properties", 
-	//More priority:
-	"file:${" + Constants.KEY_RESOURCES_PATH + "}/mail.properties"
+@PropertySource({ 
+	"classpath:mail.properties",
+	// More priority:
+	"file:${" + Constants.KEY_RESOURCES_PATH + "}/mail.properties" 
 })
+@CommonsLog
 public class ConfigurationLoader {
 	@Autowired
 	private Environment env;
 
 	public String getProperty(String key) {
+		log.debug("Loading configuration property: " + key);
 		return env.getProperty(key);
 	}
 
