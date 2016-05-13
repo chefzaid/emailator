@@ -18,7 +18,7 @@ public class BulkEmail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String bulkEmailId;
+	private String businessIdentifier;
 	@Transient
 	private SmtpConfiguration smtpConfiguration;
 	@OneToOne

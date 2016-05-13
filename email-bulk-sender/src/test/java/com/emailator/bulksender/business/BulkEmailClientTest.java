@@ -48,7 +48,7 @@ public class BulkEmailClientTest {
 		recipients.add("c.zaid@live.fr");
 		
 		BulkEmail bulkEmail = new BulkEmail();
-		bulkEmail.setBulkEmailId(UUID.randomUUID().toString());
+		bulkEmail.setBusinessIdentifier(UUID.randomUUID().toString());
 		bulkEmail.setEmail(email);
 		bulkEmail.setSmtpConfiguration(smtpConf);
 		bulkEmail.setRecipients(recipients);

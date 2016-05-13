@@ -30,7 +30,7 @@ import lombok.extern.apachecommons.CommonsLog;
 public class BulkEmailClient {
 
 	public boolean send(BulkEmail bulkEmail) {
-		log.info("Trying to send email [{" + bulkEmail.getBulkEmailId() + "}]");
+		log.info("Trying to send email [{" + bulkEmail.getBusinessIdentifier() + "}]");
 		boolean isSuccessfullySent = true;
 		try {
 			// Set SMTP server configuration

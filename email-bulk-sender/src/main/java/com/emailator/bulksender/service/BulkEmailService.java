@@ -25,7 +25,7 @@ public class BulkEmailService {
 		// TODO Manage exceptions + logs
 		// Set bulkEmail ID
 		String bulkEmailId = UUID.randomUUID().toString();
-		bulkEmail.setBulkEmailId(bulkEmailId);
+		bulkEmail.setBusinessIdentifier(bulkEmailId);
 		// Save bulkEmail non-sensitive data to DB
 		bulkEmailDao.save(bulkEmail);
 		// Send bulkEmail
