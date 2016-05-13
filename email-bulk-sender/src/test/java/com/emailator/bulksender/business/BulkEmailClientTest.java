@@ -32,18 +32,19 @@ public class BulkEmailClientTest {
 		smtpConf.setEnableAuthentication(true);
 		smtpConf.setEnableStartTls(true);
 		smtpConf.setHost("smtp.gmail.com");
-		smtpConf.setUsername("");
-		smtpConf.setPassword("");
+		smtpConf.setPort(587);
+		smtpConf.setUsername("emailator.test@gmail.com");
+		smtpConf.setPassword("emailator.test1990");
 		
 		Email email = new Email();
 		email.setSubject("Test");
 		email.setBody("Hello World!");
-		email.setSender("");
+		email.setSender("emailator.test@gmail.com");
 		
 		List<String> recipients = new ArrayList<>();
-		recipients.add("");
-		recipients.add("");
-		recipients.add("");
+		recipients.add("chefzaid@gmail.com");
+		recipients.add("zaid-9@hotmail.fr");
+		recipients.add("c.zaid@live.fr");
 		
 		BulkEmail bulkEmail = new BulkEmail();
 		bulkEmail.setEmail(email);
@@ -53,7 +54,7 @@ public class BulkEmailClientTest {
 		try {
 			emailClient.send(bulkEmail);
 		} catch (Exception e){
-			Assert.fail("Exception thrown during the sending");
+			Assert.fail("Exception thrown while sending");
 		}
 	}
 	
