@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,54 +16,53 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.emailator.bulksender.EmailBulkSenderApplication;
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Email;
+import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.beans.SmtpConfiguration;
-import com.emailator.bulksender.business.BulkEmailClient;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
 @WebAppConfiguration
 public class BulkEmailClientTest {
-	
+
 	@Autowired
 	private BulkEmailClient emailClient;
 
-	@Test
-	public void testSendViaGmailSuccess() {
-		
+	private BulkEmail bulkEmail;
+
+	@Before
+	public void setUp() {
 		SmtpConfiguration smtpConf = new SmtpConfiguration();
 		smtpConf.setEnableAuthentication(true);
 		smtpConf.setEnableStartTls(true);
 		smtpConf.setHost("smtp.gmail.com");
 		smtpConf.setPort(587);
-		smtpConf.setUsername("emailator.test@gmail.com");
+		smtpConf.setUsername("emailator.test");
 		smtpConf.setPassword("emailator.test1990");
-		
+
 		Email email = new Email();
 		email.setSubject("Test");
 		email.setBody("Hello World!");
 		email.setSender("emailator.test@gmail.com");
-		
-		List<String> recipients = new ArrayList<>();
-		recipients.add("chefzaid@gmail.com");
-		recipients.add("zaid-9@hotmail.fr");
-		recipients.add("c.zaid@live.fr");
-		
-		BulkEmail bulkEmail = new BulkEmail();
-		bulkEmail.setBusinessIdentifier(UUID.randomUUID().toString());
+
+		List<Recipient> recipients = new ArrayList<>();
+		recipients.add(new Recipient("chefzaid@gmail.com"));
+		recipients.add(new Recipient("zaid-9@hotmail.fr"));
+		recipients.add(new Recipient("c.zaid@live.fr"));
+
+		bulkEmail = new BulkEmail();
+		bulkEmail.setUuid(UUID.randomUUID().toString());
 		bulkEmail.setEmail(email);
 		bulkEmail.setSmtpConfiguration(smtpConf);
 		bulkEmail.setRecipients(recipients);
-		
+	}
+
+	@Test
+	public void testSendViaGmailSuccess() {
 		try {
 			emailClient.send(bulkEmail);
-		} catch (Exception e){
+		} catch (Exception e) {
 			Assert.fail("Exception thrown while sending");
 		}
-	}
-	
-	@Test
-	public void testSendViaGmailError() {
-		
 	}
 
 }

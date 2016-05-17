@@ -2,11 +2,11 @@ package com.emailator.bulksender.beans;
 
 import java.util.List;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -18,11 +18,11 @@ public class BulkEmail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String businessIdentifier;
+	private String uuid;
 	@Transient
 	private SmtpConfiguration smtpConfiguration;
 	@OneToOne
 	private Email email;
-	@ElementCollection
-	private List<String> recipients;
+	@OneToMany
+	private List<Recipient> recipients;
 }

@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.emailator.bulksender.beans.BulkEmail;
-import com.emailator.bulksender.service.BulkEmailService;
+import com.emailator.bulksender.service.BulkEmailSenderService;
 
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -18,7 +18,7 @@ import lombok.extern.apachecommons.CommonsLog;
 public class BulkEmailRest {
 
 	@Autowired
-	private BulkEmailService bulkEmailService;
+	private BulkEmailSenderService bulkEmailService;
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
