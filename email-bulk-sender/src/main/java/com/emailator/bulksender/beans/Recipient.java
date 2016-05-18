@@ -16,7 +16,6 @@ public class Recipient {
 	private String emailAddress;
 
 	public Recipient() {
-
 	}
 
 	public Recipient(String emailAddress) {

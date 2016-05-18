@@ -14,7 +14,7 @@ import lombok.extern.apachecommons.CommonsLog;
 
 @Service
 @CommonsLog
-public class BulkEmailSenderService {
+public class BulkEmailService {
 
 	@Autowired
 	private BulkEmailDao bulkEmailDao;

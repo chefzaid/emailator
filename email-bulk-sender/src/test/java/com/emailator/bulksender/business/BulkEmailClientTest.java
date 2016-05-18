@@ -45,9 +45,9 @@ public class BulkEmailClientTest {
 		email.setSender("emailator.test@gmail.com");
 
 		List<Recipient> recipients = new ArrayList<>();
-		recipients.add(new Recipient("chefzaid@gmail.com"));
-		recipients.add(new Recipient("zaid-9@hotmail.fr"));
-		recipients.add(new Recipient("c.zaid@live.fr"));
+		recipients.add(new Recipient("emailator.test1@mailinator.com"));
+		recipients.add(new Recipient("emailator.test2@mailinator.com"));
+		recipients.add(new Recipient("emailator.test3@mailinator.com"));
 
 		bulkEmail = new BulkEmail();
 		bulkEmail.setUuid(UUID.randomUUID().toString());

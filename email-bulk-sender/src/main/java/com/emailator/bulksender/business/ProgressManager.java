@@ -43,5 +43,13 @@ public class ProgressManager {
 		progressDao.save(progress);
 		log.debug("Successfully updated to " + state.name());
 	}
+	
+	public Progress findAll(String bulkEmailUuid){
+		return null;
+	}
+	
+	public Progress findOne(String bulkEmailUuid, String emailAddress){
+		return null;
+	}
 
 }
