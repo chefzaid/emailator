@@ -1,4 +1,4 @@
-package com.emailator.bulksender.service;
+package com.emailator.bulksender.unit.service;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -13,5 +13,8 @@ import com.emailator.bulksender.EmailBulkSenderApplication;
 @WebAppConfiguration
 @ActiveProfiles("test")
 public class ProgressServiceTest {
+	
+	// No Mocks
+	// Seed the database
 
 }

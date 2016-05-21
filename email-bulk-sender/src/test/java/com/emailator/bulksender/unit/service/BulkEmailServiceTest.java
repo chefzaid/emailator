@@ -1,4 +1,4 @@
-package com.emailator.bulksender.service;
+package com.emailator.bulksender.unit.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import com.emailator.bulksender.EmailBulkSenderApplication;
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Email;
 import com.emailator.bulksender.beans.Recipient;
+import com.emailator.bulksender.service.BulkEmailService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
@@ -49,7 +50,7 @@ public class BulkEmailServiceTest {
 	
 	@Test
 	public void testSend(){
-		// TODO: Mock BulkEmailClient and assert on DB entries
+		// TODO: Mock BulkEmailClient, fail on exception
 		bulkEmailService.send(bulkEmail);
 	}
 

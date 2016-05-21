@@ -1,4 +1,4 @@
-package com.emailator.bulksender.business;
+package com.emailator.bulksender.unit.business;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Email;
 import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.beans.SmtpConfiguration;
+import com.emailator.bulksender.business.BulkEmailClient;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)

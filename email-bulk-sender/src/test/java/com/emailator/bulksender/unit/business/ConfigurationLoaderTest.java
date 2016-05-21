@@ -1,4 +1,4 @@
-package com.emailator.bulksender.business;
+package com.emailator.bulksender.unit.business;
 
 import org.junit.Assert;
 import org.junit.Test;

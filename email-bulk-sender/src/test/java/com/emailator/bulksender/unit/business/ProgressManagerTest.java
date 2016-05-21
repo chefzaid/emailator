@@ -1,4 +1,4 @@
-package com.emailator.bulksender.business;
+package com.emailator.bulksender.unit.business;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.emailator.bulksender.EmailBulkSenderApplication;
 import com.emailator.bulksender.beans.BulkEmail;
+import com.emailator.bulksender.business.ProgressManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
