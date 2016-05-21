@@ -8,13 +8,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.service.BulkEmailService;
 
 import lombok.extern.apachecommons.CommonsLog;
 
-@Path("")
+@Component
+@Path("/sender")
 @CommonsLog
 public class BulkEmailRest {
 
@@ -25,10 +28,15 @@ public class BulkEmailRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response sendEmail(BulkEmail bulkEmail) {
-		log.debug("Sending...");
-		// TODO: REST conf + logs + exception management
-		bulkEmailService.send(bulkEmail);
-		return null;
+		log.debug("Sending bulk email...");
+		HttpStatus status = HttpStatus.OK;
+		try {
+			bulkEmailService.send(bulkEmail);
+		} catch (Exception e) {
+			log.error("Error while calling service", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return Response.status(status.value()).entity(status.getReasonPhrase()).build();
 	}
 
 }

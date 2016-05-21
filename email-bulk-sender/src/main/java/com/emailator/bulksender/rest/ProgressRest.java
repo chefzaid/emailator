@@ -8,12 +8,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
+import com.emailator.bulksender.beans.Progress;
 import com.emailator.bulksender.service.ProgressService;
 
 import lombok.extern.apachecommons.CommonsLog;
 
-@Path("")
+@Component
+@Path("/progress")
 @CommonsLog
 public class ProgressRest {
 
@@ -21,22 +25,36 @@ public class ProgressRest {
 	private ProgressService progressManagerService;
 
 	@GET
-	@Path("all/{bulkEmailUuid}")
+	@Path("/all/{bulkEmailUuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findAll(@PathParam("bulkEmailUuid") String bulkEmailUuid) {
-		log.debug("Getting all....");
-		progressManagerService.findAll(bulkEmailUuid);
-		return null;
+		log.debug("Calling service findAll....");
+		HttpStatus status = HttpStatus.OK;
+		Progress result = null;
+		try {
+			result = progressManagerService.findAll(bulkEmailUuid);
+		} catch (Exception e) {
+			log.error("Error while calling service", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return Response.status(status.value()).entity(result).build();
 	}
 
 	@GET
-	@Path("one/{bulkEmailUuid}/{emailAddress}")
+	@Path("/one/{bulkEmailUuid}/{emailAddress}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findOne(@PathParam("bulkEmailUuid") String bulkEmailUuid,
 			@PathParam("emailAddress") String emailAddress) {
-		log.debug("Getting one....");
-		progressManagerService.findOne(bulkEmailUuid, emailAddress);
-		return null;
+		log.debug("Calling service findOne...");
+		HttpStatus status = HttpStatus.OK;
+		Progress result = null;
+		try {
+			result = progressManagerService.findOne(bulkEmailUuid, emailAddress);
+		} catch (Exception e) {
+			log.error("Error while calling service", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return Response.status(status.value()).entity(result).build();
 	}
 
 }
