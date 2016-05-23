@@ -23,16 +23,18 @@ public class BulkEmailService {
 	@Autowired
 	private BulkEmailClient bulkEmailClient;
 
-	public void send(BulkEmail bulkEmail) {
+	public String send(BulkEmail bulkEmail) {
 		log.debug("Saving and sending...");
 		// Set bulkEmail ID
-		bulkEmail.setUuid(UUID.randomUUID().toString());
+		String uuid = UUID.randomUUID().toString();
+		bulkEmail.setUuid(uuid);
 		// Init the progress state of all emails to PENDING
 		progressManager.initStates(bulkEmail);
 		// Save bulkEmail non-sensitive data to DB
 		bulkEmailDao.save(bulkEmail);
 		// Send bulkEmail
 		bulkEmailClient.send(bulkEmail);
+		return uuid;
 	}
 
 }

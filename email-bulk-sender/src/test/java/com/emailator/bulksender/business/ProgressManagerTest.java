@@ -1,4 +1,4 @@
-package com.emailator.bulksender.unit.business;
+package com.emailator.bulksender.business;
 
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +36,6 @@ public class ProgressManagerTest {
 	@Test
 	public void testInitStates() {
 		progressManager.initStates(new BulkEmail());
-
 	}
 
 	@Test
@@ -51,6 +50,11 @@ public class ProgressManagerTest {
 
 	@Test
 	public void testFinOne() {
+
+	}
+	
+	@Test
+	public void testPurgeData() {
 
 	}
 }

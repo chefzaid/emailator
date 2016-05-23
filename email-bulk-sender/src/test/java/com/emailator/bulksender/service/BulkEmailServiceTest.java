@@ -1,4 +1,4 @@
-package com.emailator.bulksender.unit.service;
+package com.emailator.bulksender.service;
 
 import java.util.ArrayList;
 import java.util.List;

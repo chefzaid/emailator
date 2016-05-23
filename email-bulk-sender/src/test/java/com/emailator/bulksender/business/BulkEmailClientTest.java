@@ -1,4 +1,4 @@
-package com.emailator.bulksender.unit.business;
+package com.emailator.bulksender.business;
 
 import java.util.ArrayList;
 import java.util.List;

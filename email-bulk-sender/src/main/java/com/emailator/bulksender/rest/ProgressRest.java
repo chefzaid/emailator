@@ -1,5 +1,7 @@
 package com.emailator.bulksender.rest;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -30,7 +32,7 @@ public class ProgressRest {
 	public Response findAll(@PathParam("bulkEmailUuid") String bulkEmailUuid) {
 		log.debug("Calling service findAll....");
 		HttpStatus status = HttpStatus.OK;
-		Progress result = null;
+		List<Progress> result = null;
 		try {
 			result = progressManagerService.findAll(bulkEmailUuid);
 		} catch (Exception e) {

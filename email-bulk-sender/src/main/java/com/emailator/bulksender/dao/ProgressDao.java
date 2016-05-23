@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.emailator.bulksender.beans.Progress;
 
 @Repository
-public interface ProgressDao extends CrudRepository<Progress, Long>  {
+public interface ProgressDao extends CrudRepository<Progress, Long> {
 
 }

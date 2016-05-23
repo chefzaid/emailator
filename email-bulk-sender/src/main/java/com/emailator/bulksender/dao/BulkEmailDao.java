@@ -7,5 +7,7 @@ import com.emailator.bulksender.beans.BulkEmail;
 
 @Repository
 public interface BulkEmailDao extends CrudRepository<BulkEmail, Long> {
+	
+	BulkEmail findByUuid(String uuid);
 
 }

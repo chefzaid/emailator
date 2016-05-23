@@ -1,5 +1,7 @@
 package com.emailator.bulksender.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ public class ProgressService {
 	@Autowired
 	private ProgressManager progressManager;
 
-	public Progress findAll(String bulkEmailUuid) {
+	public List<Progress> findAll(String bulkEmailUuid) {
 		return progressManager.findAll(bulkEmailUuid);
 	}
 

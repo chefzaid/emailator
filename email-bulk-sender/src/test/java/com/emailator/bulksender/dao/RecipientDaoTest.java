@@ -1,5 +1,6 @@
-package com.emailator.bulksender.unit.service;
+package com.emailator.bulksender.dao;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
@@ -12,9 +13,11 @@ import com.emailator.bulksender.EmailBulkSenderApplication;
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
 @WebAppConfiguration
 @ActiveProfiles("test")
-public class ProgressServiceTest {
+public class RecipientDaoTest {
 	
-	// No Mocks
-	// Seed the database
+	@Test
+	public void testFindByUuidAndEmailAddress(){
+		// TODO: Assert on DB entries
+	}
 
 }

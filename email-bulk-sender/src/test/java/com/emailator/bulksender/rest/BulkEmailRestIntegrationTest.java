@@ -1,4 +1,4 @@
-package com.emailator.bulksender.unit.rest;
+package com.emailator.bulksender.rest;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -12,8 +12,8 @@ import com.emailator.bulksender.EmailBulkSenderApplication;
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
 @WebAppConfiguration
 @ActiveProfiles("test")
-public class ProgressRestTest {
+public class BulkEmailRestIntegrationTest {
 
-	// TODO: Use RestAssured
+	// TODO: Use RestAssured. No Mocks. Assert on DB entries
 	
 }
