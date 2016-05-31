@@ -8,7 +8,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,8 +19,6 @@ public class Progress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@OneToOne
-	private Recipient recipient;
 	@Enumerated(EnumType.STRING)
 	private ProgressState state;
 	@Temporal(value = TemporalType.TIMESTAMP)

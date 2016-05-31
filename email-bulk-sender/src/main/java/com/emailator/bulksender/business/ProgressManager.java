@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,25 +31,35 @@ public class ProgressManager {
 
 	public void initStates(BulkEmail bulkEmail) {
 		log.debug("Init states to PENDING for all emails in " + bulkEmail.getUuid());
+		// Save progress
 		Progress progress = new Progress();
 		progress.setState(ProgressState.PENDING);
 		progress.setCreationTime(new Date());
 		progress.setLastUpdateTime(new Date());
-		for (Recipient recipient : bulkEmail.getRecipients()) {
-			progress.setRecipient(recipient);
-			progressDao.save(progress);
+		progressDao.save(progress);
+		
+		// Update each existing recipient with its progress
+		for (Recipient recipient : bulkEmail.getRecipients()) {			
+			recipient.setProgress(progress);
+			recipientDao.save(recipient);
 			log.debug("Successfully saved for " + recipient.getEmailAddress());
 		}
 	}
 
 	public void updateState(Recipient recipient, ProgressState state, String... details) {
 		log.debug("Saving progress state of " + recipient.getEmailAddress());
+		// Save progress
 		Progress progress = new Progress();
-		progress.setRecipient(recipient);
 		progress.setState(state);
 		progress.setLastUpdateTime(new Date());
 		progress.setDetails(details[0]);
 		progressDao.save(progress);
+
+		// Update existing recipient with its progress 
+		Recipient newRecipient = new Recipient();
+		BeanUtils.copyProperties(recipient, newRecipient);
+		newRecipient.setProgress(progress);
+		recipientDao.save(newRecipient);
 		log.debug("Successfully updated to " + state.name());
 	}
 
