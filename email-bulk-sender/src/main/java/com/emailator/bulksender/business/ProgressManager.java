@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,37 +28,16 @@ public class ProgressManager {
 	@Autowired
 	private BulkEmailDao bulkEmailDao;
 
-	public void initStates(BulkEmail bulkEmail) {
-		log.debug("Init states to PENDING for all emails in " + bulkEmail.getUuid());
-		// Save progress
-		Progress progress = new Progress();
-		progress.setState(ProgressState.PENDING);
-		progress.setCreationTime(new Date());
-		progress.setLastUpdateTime(new Date());
-		progressDao.save(progress);
-		
-		// Update each existing recipient with its progress
-		for (Recipient recipient : bulkEmail.getRecipients()) {			
-			recipient.setProgress(progress);
-			recipientDao.save(recipient);
-			log.debug("Successfully saved for " + recipient.getEmailAddress());
-		}
-	}
-
 	public void updateState(Recipient recipient, ProgressState state, String... details) {
 		log.debug("Saving progress state of " + recipient.getEmailAddress());
 		// Save progress
-		Progress progress = new Progress();
+		Progress progress = recipient.getProgress();
 		progress.setState(state);
 		progress.setLastUpdateTime(new Date());
-		progress.setDetails(details[0]);
+		if (details != null && details.length > 0) {
+			progress.setDetails(details[0]);
+		}
 		progressDao.save(progress);
-
-		// Update existing recipient with its progress 
-		Recipient newRecipient = new Recipient();
-		BeanUtils.copyProperties(recipient, newRecipient);
-		newRecipient.setProgress(progress);
-		recipientDao.save(newRecipient);
 		log.debug("Successfully updated to " + state.name());
 	}
 
@@ -79,15 +57,6 @@ public class ProgressManager {
 		Recipient recipient = recipientDao.findByUuidAndEmailAddress(bulkEmailUuid, emailAddress);
 		log.debug("Returning result");
 		return recipient.getProgress();
-	}
-	
-	public void purgeData(String bulkEmailUuid){
-		log.debug("Purging data for " + bulkEmailUuid);
-		BulkEmail bulkEmail = bulkEmailDao.findByUuid(bulkEmailUuid);
-		for (Recipient recipient : bulkEmail.getRecipients()) {
-			progressDao.delete(recipient.getProgress());
-		}
-		log.debug("Data purged");
 	}
 
 }

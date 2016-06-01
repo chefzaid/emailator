@@ -26,4 +26,10 @@ public class Progress {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date lastUpdateTime;
 	private String details;
+
+	public Progress() {
+		this.state = ProgressState.PENDING;
+		this.creationTime = new Date();
+		this.lastUpdateTime = new Date();
+	}
 }

@@ -20,19 +20,23 @@ import com.emailator.bulksender.utils.Constants;
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
 @WebAppConfiguration
 @ActiveProfiles("test")
-@SqlGroup({ 
-	@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = Constants.TEST_DB_SCRIPTS_PATH + "seed.sql"),
-	@Sql(executionPhase = ExecutionPhase.AFTER_TEST_METHOD, scripts = Constants.TEST_DB_SCRIPTS_PATH + "purge.sql") })
+@SqlGroup({
+		@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = Constants.TEST_DB_SCRIPTS_PATH + "seed.sql"),
+		@Sql(executionPhase = ExecutionPhase.AFTER_TEST_METHOD, scripts = Constants.TEST_DB_SCRIPTS_PATH + "purge.sql") })
 public class RecipientDaoTest {
-	
+
 	@Autowired
 	private RecipientDao recipientDao;
 
 	@Test
 	public void testFindByUuidAndEmailAddress() {
-		Recipient result = recipientDao.findByUuidAndEmailAddress(
-				"azerty1234", "emailator.test1@mailinator.com");
+		Recipient result = null;
+		// Success
+		result = recipientDao.findByUuidAndEmailAddress("azerty1234", "emailator.test1@mailinator.com");
 		Assert.assertTrue(result.getId() == 1);
+		// Failure
+		result = recipientDao.findByUuidAndEmailAddress("nothing", "inexisting@mailinator.com");
+		Assert.assertNull(result);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.emailator.bulksender.beans;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +22,8 @@ public class BulkEmail {
 	private String uuid;
 	@Transient
 	private SmtpConfiguration smtpConfiguration;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Email email;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Recipient> recipients;
 }
