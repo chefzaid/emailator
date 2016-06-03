@@ -30,13 +30,8 @@ public class RecipientDaoTest {
 
 	@Test
 	public void testFindByUuidAndEmailAddress() {
-		Recipient result = null;
-		// Success
-		result = recipientDao.findByUuidAndEmailAddress("azerty1234", "emailator.test1@mailinator.com");
+		Recipient result = recipientDao.findByUuidAndEmailAddress("azerty1234", "emailator.test1@mailinator.com");
 		Assert.assertTrue(result.getId() == 1);
-		// Failure
-		result = recipientDao.findByUuidAndEmailAddress("nothing", "inexisting@mailinator.com");
-		Assert.assertNull(result);
 	}
 
 }

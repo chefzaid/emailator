@@ -1,8 +1,10 @@
 package com.emailator.bulksender.business;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.internet.InternetAddress;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,9 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.emailator.bulksender.EmailBulkSenderApplication;
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Email;
-import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.beans.SmtpConfiguration;
-import com.emailator.bulksender.business.BulkEmailClient;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
@@ -29,7 +29,7 @@ public class BulkEmailClientTest {
 
 	@Autowired
 	private BulkEmailClient emailClient;
-
+	
 	private BulkEmail bulkEmail;
 
 	@Before
@@ -47,24 +47,22 @@ public class BulkEmailClientTest {
 		email.setBody("Hello World!");
 		email.setSender("emailator.test@gmail.com");
 
-		List<Recipient> recipients = new ArrayList<>();
-		recipients.add(new Recipient("emailator.test1@mailinator.com"));
-		recipients.add(new Recipient("emailator.test2@mailinator.com"));
-		recipients.add(new Recipient("emailator.test3@mailinator.com"));
-
 		bulkEmail = new BulkEmail();
 		bulkEmail.setUuid(UUID.randomUUID().toString());
 		bulkEmail.setEmail(email);
 		bulkEmail.setSmtpConfiguration(smtpConf);
-		bulkEmail.setRecipients(recipients);
 	}
 
 	@Test
-	public void testSendViaGmailSuccess() {
+	public void testSend() {
 		try {
-			emailClient.send(bulkEmail);
+			Message msg = emailClient.buildMessage(bulkEmail);
+			Address address = new InternetAddress("emailator.test1@mailinator.com");
+			msg.setRecipient(Message.RecipientType.TO, address);
+			emailClient.asyncSend(msg);
 		} catch (Exception e) {
-			Assert.fail("Exception thrown while sending");
+			e.printStackTrace();
+			Assert.fail("Error while sending the message");
 		}
 	}
 

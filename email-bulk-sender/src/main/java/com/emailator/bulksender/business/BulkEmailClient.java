@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -18,12 +18,14 @@ import javax.mail.internet.MimeMultipart;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Email;
-import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.beans.SmtpConfiguration;
+import com.emailator.bulksender.dao.BulkEmailDao;
 import com.emailator.bulksender.utils.Constants;
 
 import lombok.extern.apachecommons.CommonsLog;
@@ -33,22 +35,7 @@ import lombok.extern.apachecommons.CommonsLog;
 public class BulkEmailClient {
 
 	@Autowired
-	private AsyncEmailSender asyncEmailSender;
-
-	public void send(BulkEmail bulkEmail) {
-		log.info("Trying to send email " + bulkEmail.getUuid());
-		Message msg = buildMessage(bulkEmail);
-		// Send message to recipients, one by one
-		for (Recipient recipient : bulkEmail.getRecipients()) {
-			try {
-				Address address = new InternetAddress(recipient.getEmailAddress());
-				msg.setRecipient(Message.RecipientType.TO, address);
-				asyncEmailSender.send(msg, recipient);
-			} catch (MessagingException e) {
-				log.error("Error while sending email to: " + recipient.getEmailAddress(), e);
-			}
-		}
-	}
+	private BulkEmailDao bulkEmailDao;
 
 	private Session buildSession(BulkEmail bulkEmail) {
 		// Set SMTP server configuration
@@ -73,7 +60,7 @@ public class BulkEmailClient {
 		return Session.getDefaultInstance(props, auth);
 	}
 
-	private Message buildMessage(BulkEmail bulkEmail) {
+	public Message buildMessage(BulkEmail bulkEmail) {
 		Session session = buildSession(bulkEmail);
 		Message msg = new MimeMessage(session);
 		try {
@@ -104,6 +91,18 @@ public class BulkEmailClient {
 			log.error("Error while building the email", e);
 		}
 		return msg;
+	}
+
+	@Async
+	public void asyncSend(Message msg) throws MessagingException {
+		Transport.send(msg);
+	}
+
+	@Transactional
+	public void save(BulkEmail bulkEmail) {
+		log.debug("Saving to database: " + bulkEmail.getUuid());
+		bulkEmailDao.save(bulkEmail);
+		log.debug("Saved to database: " + bulkEmail.getUuid());
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Progress;
@@ -28,9 +29,9 @@ public class ProgressManager {
 	@Autowired
 	private BulkEmailDao bulkEmailDao;
 
+	@Transactional
 	public void updateState(Recipient recipient, ProgressState state, String... details) {
 		log.debug("Saving progress state of " + recipient.getEmailAddress());
-		// Save progress
 		Progress progress = recipient.getProgress();
 		progress.setState(state);
 		progress.setLastUpdateTime(new Date());
@@ -41,6 +42,7 @@ public class ProgressManager {
 		log.debug("Successfully updated to " + state.name());
 	}
 
+	@Transactional
 	public List<Progress> findAll(String bulkEmailUuid) {
 		log.debug("Finding Progress for each email address in " + bulkEmailUuid);
 		List<Progress> result = new ArrayList<>();
@@ -52,6 +54,7 @@ public class ProgressManager {
 		return result;
 	}
 
+	@Transactional
 	public Progress findOne(String bulkEmailUuid, String emailAddress) {
 		log.debug("Finding Progress for email address " + emailAddress + " of " + bulkEmailUuid);
 		Recipient recipient = recipientDao.findByUuidAndEmailAddress(bulkEmailUuid, emailAddress);

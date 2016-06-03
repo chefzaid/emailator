@@ -5,9 +5,9 @@ INSERT INTO email_attachments_paths(email_id, attachments_paths) VALUES(1, '/tmp
 
 INSERT INTO bulk_email(id, uuid, email_id) VALUES(1, 'azerty1234', 1);
 
-INSERT INTO progress(id, state) VALUES(1, NULL);
-INSERT INTO progress(id, state) VALUES(2, NULL);
-INSERT INTO progress(id, state) VALUES(3, NULL);
+INSERT INTO progress(id, state) VALUES(1, 'PENDING');
+INSERT INTO progress(id, state) VALUES(2, 'PENDING');
+INSERT INTO progress(id, state) VALUES(3, 'PENDING');
 
 INSERT INTO recipient(id, email_address, bulk_email_id, progress_id) VALUES(1, 'emailator.test1@mailinator.com', 1, 1);
 INSERT INTO recipient(id, email_address, bulk_email_id, progress_id) VALUES(2, 'emailator.test2@mailinator.com', 1, 2);

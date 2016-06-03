@@ -3,6 +3,7 @@ package com.emailator.bulksender.beans;
 import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class Recipient {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String emailAddress;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Progress progress;
 	@ManyToOne
 	private BulkEmail bulkEmail;

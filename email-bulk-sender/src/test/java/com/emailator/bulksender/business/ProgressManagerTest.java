@@ -1,5 +1,7 @@
 package com.emailator.bulksender.business;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,11 +48,16 @@ public class ProgressManagerTest {
 
 	@Test
 	public void testFindAll() {
-
+		List<Progress> result = progressManager.findAll("azerty1234");
+		for (Progress p : result) {
+			Assert.assertTrue(p.getState() == ProgressState.PENDING);
+		}
 	}
 
 	@Test
 	public void testFindOne() {
-
+		Progress result = progressManager.findOne("azerty1234", "emailator.test1@mailinator.com");
+		Assert.assertTrue(result.getState() == ProgressState.PENDING);
 	}
+
 }
