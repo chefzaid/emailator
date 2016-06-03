@@ -39,7 +39,7 @@ public class ProgressManager {
 			progress.setDetails(details[0]);
 		}
 		progressDao.save(progress);
-		log.debug("Successfully updated to " + state.name());
+		log.debug("Progress updated to " + state.name() + " for " + recipient.getEmailAddress());
 	}
 
 	@Transactional
@@ -58,7 +58,6 @@ public class ProgressManager {
 	public Progress findOne(String bulkEmailUuid, String emailAddress) {
 		log.debug("Finding Progress for email address " + emailAddress + " of " + bulkEmailUuid);
 		Recipient recipient = recipientDao.findByUuidAndEmailAddress(bulkEmailUuid, emailAddress);
-		log.debug("Returning result");
 		return recipient.getProgress();
 	}
 

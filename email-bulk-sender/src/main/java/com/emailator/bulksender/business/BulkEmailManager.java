@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -18,12 +19,12 @@ import javax.mail.internet.MimeMultipart;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Email;
+import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.beans.SmtpConfiguration;
 import com.emailator.bulksender.dao.BulkEmailDao;
 import com.emailator.bulksender.utils.Constants;
@@ -32,7 +33,7 @@ import lombok.extern.apachecommons.CommonsLog;
 
 @Component
 @CommonsLog
-public class BulkEmailClient {
+public class BulkEmailManager {
 
 	@Autowired
 	private BulkEmailDao bulkEmailDao;
@@ -93,16 +94,18 @@ public class BulkEmailClient {
 		return msg;
 	}
 
-	@Async
-	public void asyncSend(Message msg) throws MessagingException {
+	public void send(Message msg, Recipient recipient) throws MessagingException {
+		Address address = new InternetAddress(recipient.getEmailAddress());
+		msg.setRecipient(Message.RecipientType.TO, address);
+		log.debug("Sending message to " + recipient.getEmailAddress());
 		Transport.send(msg);
+		log.debug("Message sent to " + recipient.getEmailAddress());
 	}
 
 	@Transactional
 	public void save(BulkEmail bulkEmail) {
 		log.debug("Saving to database: " + bulkEmail.getUuid());
 		bulkEmailDao.save(bulkEmail);
-		log.debug("Saved to database: " + bulkEmail.getUuid());
 	}
 
 }

@@ -2,9 +2,7 @@ package com.emailator.bulksender.business;
 
 import java.util.UUID;
 
-import javax.mail.Address;
 import javax.mail.Message;
-import javax.mail.internet.InternetAddress;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,17 +17,18 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.emailator.bulksender.EmailBulkSenderApplication;
 import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Email;
+import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.beans.SmtpConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
 @WebAppConfiguration
 @ActiveProfiles("test")
-public class BulkEmailClientTest {
+public class BulkEmailManagerTest {
 
 	@Autowired
-	private BulkEmailClient emailClient;
-	
+	private BulkEmailManager emailClient;
+
 	private BulkEmail bulkEmail;
 
 	@Before
@@ -57,9 +56,8 @@ public class BulkEmailClientTest {
 	public void testSend() {
 		try {
 			Message msg = emailClient.buildMessage(bulkEmail);
-			Address address = new InternetAddress("emailator.test1@mailinator.com");
-			msg.setRecipient(Message.RecipientType.TO, address);
-			emailClient.asyncSend(msg);
+			Recipient recipient = new Recipient("emailator.test1@mailinator.com");
+			emailClient.send(msg, recipient);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Error while sending the message");

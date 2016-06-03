@@ -18,7 +18,7 @@ import lombok.extern.apachecommons.CommonsLog;
 	"file:${" + Constants.KEY_RESOURCES_PATH + "}/mail.properties" 
 })
 @CommonsLog
-public class ConfigurationLoader {
+public class ConfigurationManager {
 	@Autowired
 	private Environment env;
 

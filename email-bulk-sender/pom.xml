@@ -5,7 +5,7 @@
 
 	<groupId>com.emailator</groupId>
 	<artifactId>email-bulk-sender</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>email-bulk-sender</name>
@@ -21,7 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<mail.version>1.4</mail.version>
+		<mail.version>1.4.6</mail.version>
 		<lombok.version>1.16.6</lombok.version>
 	</properties>
 
