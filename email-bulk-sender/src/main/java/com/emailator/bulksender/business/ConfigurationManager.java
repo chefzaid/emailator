@@ -19,12 +19,13 @@ import lombok.extern.apachecommons.CommonsLog;
 })
 @CommonsLog
 public class ConfigurationManager {
+	
 	@Autowired
-	private Environment env;
+	private Environment environment;
 
 	public String getProperty(String key) {
 		log.debug("Loading configuration property: " + key);
-		return env.getProperty(key);
+		return environment.getProperty(key);
 	}
 
 }

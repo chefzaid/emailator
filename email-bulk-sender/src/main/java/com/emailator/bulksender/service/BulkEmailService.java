@@ -22,7 +22,7 @@ import lombok.extern.apachecommons.CommonsLog;
 public class BulkEmailService {
 
 	@Autowired
-	private BulkEmailManager bulkEmailClient;
+	private BulkEmailManager bulkEmailManager;
 	@Autowired
 	private ProgressManager progressManager;
 
@@ -33,14 +33,14 @@ public class BulkEmailService {
 		for (Recipient recipient : bulkEmail.getRecipients()) {
 			recipient.setProgress(new Progress());
 		}
-		bulkEmailClient.save(bulkEmail);
+		bulkEmailManager.save(bulkEmail);
 
 		// Send message to each recipients, one by one
-		Message msg = bulkEmailClient.buildMessage(bulkEmail);
+		Message msg = bulkEmailManager.buildMessage(bulkEmail);
 		for (Recipient recipient : bulkEmail.getRecipients()) {
 			try {
 				progressManager.updateState(recipient, ProgressState.SENDING);
-				bulkEmailClient.send(msg, recipient);
+				bulkEmailManager.send(msg, recipient);
 				progressManager.updateState(recipient, ProgressState.SENT);
 			} catch (MessagingException e) {
 				log.error("Error while sending email to: " + recipient.getEmailAddress(), e);

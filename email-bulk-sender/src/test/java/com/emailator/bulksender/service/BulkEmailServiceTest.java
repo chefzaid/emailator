@@ -2,8 +2,8 @@ package com.emailator.bulksender.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,10 +62,15 @@ public class BulkEmailServiceTest {
 		recipients.add(new Recipient(testValues.getEmailAddress3()));
 
 		bulkEmail = new BulkEmail();
-		bulkEmail.setUuid(UUID.randomUUID().toString());
+		bulkEmail.setUuid(testValues.getEmailUuid());
 		bulkEmail.setEmail(email);
 		bulkEmail.setSmtpConfiguration(smtpConf);
 		bulkEmail.setRecipients(recipients);
+	}
+	
+	@After
+	public void tearDown() {
+		bulkEmailDao.deleteAll();
 	}
 
 	@Test

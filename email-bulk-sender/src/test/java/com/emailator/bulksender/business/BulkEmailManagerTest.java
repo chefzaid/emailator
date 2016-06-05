@@ -1,7 +1,5 @@
 package com.emailator.bulksender.business;
 
-import java.util.UUID;
-
 import javax.mail.Message;
 
 import org.junit.Assert;
@@ -50,7 +48,7 @@ public class BulkEmailManagerTest {
 		email.setSender(testValues.getEmailSender());
 
 		bulkEmail = new BulkEmail();
-		bulkEmail.setUuid(UUID.randomUUID().toString());
+		bulkEmail.setUuid(testValues.getEmailUuid());
 		bulkEmail.setEmail(email);
 		bulkEmail.setSmtpConfiguration(smtpConf);
 	}

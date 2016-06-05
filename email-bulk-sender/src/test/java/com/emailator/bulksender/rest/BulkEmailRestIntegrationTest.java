@@ -2,12 +2,12 @@ package com.emailator.bulksender.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.ws.rs.core.MediaType;
 
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +24,7 @@ import com.emailator.bulksender.beans.BulkEmail;
 import com.emailator.bulksender.beans.Email;
 import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.beans.SmtpConfiguration;
+import com.emailator.bulksender.dao.BulkEmailDao;
 import com.emailator.bulksender.testutils.RegexMatcher;
 import com.emailator.bulksender.testutils.TestValues;
 import com.jayway.restassured.RestAssured;
@@ -35,6 +36,8 @@ import com.jayway.restassured.RestAssured;
 @IntegrationTest("server.port:0")
 public class BulkEmailRestIntegrationTest {
 	
+	@Autowired
+	private BulkEmailDao bulkEmailDao;
 	@Autowired
 	private TestValues testValues;
 
@@ -68,13 +71,18 @@ public class BulkEmailRestIntegrationTest {
 		recipients.add(new Recipient(testValues.getEmailAddress3()));
 
 		bulkEmail = new BulkEmail();
-		bulkEmail.setUuid(UUID.randomUUID().toString());
+		bulkEmail.setUuid(testValues.getEmailUuid());
 		bulkEmail.setEmail(email);
 		bulkEmail.setSmtpConfiguration(smtpConf);
 		bulkEmail.setRecipients(recipients);
 
 		RestAssured.basePath = BASE_PATH;
 		RestAssured.port = serverPort;
+	}
+	
+	@After
+	public void tearDown() {
+		bulkEmailDao.deleteAll();
 	}
 
 	@Test

@@ -41,7 +41,7 @@ public class BulkEmailManager {
 	private Session buildSession(BulkEmail bulkEmail) {
 		// Set SMTP server configuration
 		SmtpConfiguration smtpConf = bulkEmail.getSmtpConfiguration();
-		Properties props = System.getProperties();
+		Properties props = new Properties();
 		props.put(Constants.KEY_SMTP_HOST, smtpConf.getHost());
 		props.put(Constants.KEY_SMTP_TLS_ENABLE, smtpConf.getEnableStartTls().toString());
 		if (smtpConf.getPort() != null) {
