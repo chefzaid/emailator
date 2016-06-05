@@ -14,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.emailator.bulksender.EmailBulkSenderApplication;
 import com.emailator.bulksender.beans.Recipient;
+import com.emailator.bulksender.testutils.TestValues;
 import com.emailator.bulksender.utils.Constants;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,10 +28,12 @@ public class RecipientDaoTest {
 
 	@Autowired
 	private RecipientDao recipientDao;
+	@Autowired
+	private TestValues testValues;
 
 	@Test
 	public void testFindByUuidAndEmailAddress() {
-		Recipient result = recipientDao.findByUuidAndEmailAddress("azerty1234", "emailator.test1@mailinator.com");
+		Recipient result = recipientDao.findByUuidAndEmailAddress(testValues.getEmailUuid(), testValues.getEmailAddress1());
 		Assert.assertTrue(result.getId() == 1);
 	}
 

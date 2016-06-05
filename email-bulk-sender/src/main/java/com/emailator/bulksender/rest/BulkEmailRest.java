@@ -25,9 +25,10 @@ public class BulkEmailRest {
 	private BulkEmailService bulkEmailService;
 
 	@POST
+	@Path("/normal")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response sendEmail(BulkEmail bulkEmail) {
+	public Response sendEmailNormal(BulkEmail bulkEmail) {
 		log.debug("Sending bulk email...");
 		HttpStatus status = HttpStatus.OK;
 		try {
@@ -37,6 +38,16 @@ public class BulkEmailRest {
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return Response.status(status.value()).entity(status.getReasonPhrase()).build();
+	}
+
+	@POST
+	@Path("/async")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response sendEmailAsync(BulkEmail bulkEmail) {
+		String msg = "Service not yet implemented";
+		log.error(msg);
+		return Response.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).entity(msg).build();
 	}
 
 }

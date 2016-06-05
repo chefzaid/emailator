@@ -23,6 +23,7 @@
 		<java.version>1.8</java.version>
 		<mail.version>1.4.6</mail.version>
 		<lombok.version>1.16.6</lombok.version>
+		<rest-assured.version>2.4.0</rest-assured.version>
 	</properties>
 
 	<dependencies>
@@ -72,6 +73,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${rest-assured.version}</version>
 		</dependency>
 	</dependencies>
 

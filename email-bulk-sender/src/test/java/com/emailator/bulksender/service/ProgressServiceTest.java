@@ -17,6 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.emailator.bulksender.EmailBulkSenderApplication;
 import com.emailator.bulksender.beans.Progress;
 import com.emailator.bulksender.beans.ProgressState;
+import com.emailator.bulksender.testutils.TestValues;
 import com.emailator.bulksender.utils.Constants;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,10 +31,12 @@ public class ProgressServiceTest {
 
 	@Autowired
 	private ProgressService progressService;
+	@Autowired
+	private TestValues testValues;
 
 	@Test
 	public void testFindAll() {
-		List<Progress> result = progressService.findAll("azerty1234");
+		List<Progress> result = progressService.findAll(testValues.getEmailUuid());
 		for (Progress p : result) {
 			Assert.assertTrue(p.getState() == ProgressState.PENDING);
 		}
@@ -41,7 +44,7 @@ public class ProgressServiceTest {
 
 	@Test
 	public void testFindOne() {
-		Progress result = progressService.findOne("azerty1234", "emailator.test1@mailinator.com");
+		Progress result = progressService.findOne(testValues.getEmailUuid(), testValues.getEmailAddress1());
 		Assert.assertTrue(result.getState() == ProgressState.PENDING);
 	}
 

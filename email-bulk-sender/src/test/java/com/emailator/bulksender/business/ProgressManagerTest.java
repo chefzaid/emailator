@@ -20,6 +20,7 @@ import com.emailator.bulksender.beans.ProgressState;
 import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.dao.ProgressDao;
 import com.emailator.bulksender.dao.RecipientDao;
+import com.emailator.bulksender.testutils.TestValues;
 import com.emailator.bulksender.utils.Constants;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,6 +38,8 @@ public class ProgressManagerTest {
 	private ProgressDao progressDao;
 	@Autowired
 	private RecipientDao recipientDao;
+	@Autowired
+	private TestValues testValues;
 
 	@Test
 	public void testUpdateState() {
@@ -48,7 +51,7 @@ public class ProgressManagerTest {
 
 	@Test
 	public void testFindAll() {
-		List<Progress> result = progressManager.findAll("azerty1234");
+		List<Progress> result = progressManager.findAll(testValues.getEmailUuid());
 		for (Progress p : result) {
 			Assert.assertTrue(p.getState() == ProgressState.PENDING);
 		}
@@ -56,7 +59,7 @@ public class ProgressManagerTest {
 
 	@Test
 	public void testFindOne() {
-		Progress result = progressManager.findOne("azerty1234", "emailator.test1@mailinator.com");
+		Progress result = progressManager.findOne(testValues.getEmailUuid(), testValues.getEmailAddress1());
 		Assert.assertTrue(result.getState() == ProgressState.PENDING);
 	}
 

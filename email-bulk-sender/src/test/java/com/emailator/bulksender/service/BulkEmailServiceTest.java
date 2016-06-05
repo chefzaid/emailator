@@ -22,6 +22,7 @@ import com.emailator.bulksender.beans.Email;
 import com.emailator.bulksender.beans.Recipient;
 import com.emailator.bulksender.beans.SmtpConfiguration;
 import com.emailator.bulksender.dao.BulkEmailDao;
+import com.emailator.bulksender.testutils.TestValues;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmailBulkSenderApplication.class)
@@ -35,28 +36,30 @@ public class BulkEmailServiceTest {
 	private BulkEmailService bulkEmailService;
 	@Autowired
 	private BulkEmailDao bulkEmailDao;
+	@Autowired
+	private TestValues testValues;
 
 	private BulkEmail bulkEmail;
 
 	@Before
 	public void setUp() {
 		SmtpConfiguration smtpConf = new SmtpConfiguration();
-		smtpConf.setEnableAuthentication(true);
-		smtpConf.setEnableStartTls(true);
-		smtpConf.setHost("smtp.gmail.com");
-		smtpConf.setPort(587);
-		smtpConf.setUsername("emailator.test");
-		smtpConf.setPassword("emailator.test1990");
+		smtpConf.setEnableAuthentication(testValues.getSmtpEnableAuthentication());
+		smtpConf.setEnableStartTls(testValues.getSmtpEnableStartTls());
+		smtpConf.setHost(testValues.getSmtpHost());
+		smtpConf.setPort(testValues.getSmtpPort());
+		smtpConf.setUsername(testValues.getSmtpUsername());
+		smtpConf.setPassword(testValues.getSmtpPassword());
 
 		Email email = new Email();
-		email.setSubject("Test");
-		email.setBody("Hello World!");
-		email.setSender("emailator.test@gmail.com");
+		email.setSubject(testValues.getEmailSubject());
+		email.setBody(testValues.getEmailBody());
+		email.setSender(testValues.getEmailSender());
 
 		List<Recipient> recipients = new ArrayList<>();
-		recipients.add(new Recipient("emailator.test1@mailinator.com"));
-		recipients.add(new Recipient("emailator.test2@mailinator.com"));
-		recipients.add(new Recipient("emailator.test3@mailinator.com"));
+		recipients.add(new Recipient(testValues.getEmailAddress1()));
+		recipients.add(new Recipient(testValues.getEmailAddress2()));
+		recipients.add(new Recipient(testValues.getEmailAddress3()));
 
 		bulkEmail = new BulkEmail();
 		bulkEmail.setUuid(UUID.randomUUID().toString());
