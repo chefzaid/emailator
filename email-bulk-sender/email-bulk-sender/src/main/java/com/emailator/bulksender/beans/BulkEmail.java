@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class BulkEmail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@NotNull
 	private String uuid;
 	@Transient
 	private SmtpConfiguration smtpConfiguration;

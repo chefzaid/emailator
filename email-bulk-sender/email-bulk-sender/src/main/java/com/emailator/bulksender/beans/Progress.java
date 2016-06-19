@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class Progress {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private ProgressState state;
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date creationTime;

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class Recipient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@NotNull
 	private String emailAddress;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Progress progress;
