@@ -1,2 +1,2 @@
 # emailator
-A close sibling to Fhamator :D
+A set of mailing tools.
