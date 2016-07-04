@@ -1,5 +1,4 @@
 jQuery(document).ready(function($) {
-
 	$(".headroom").headroom({
 		"tolerance": 20,
 		"offset": 50,
@@ -9,5 +8,4 @@ jQuery(document).ready(function($) {
 			"unpinned": "slideUp"
 		}
 	});
-
 });

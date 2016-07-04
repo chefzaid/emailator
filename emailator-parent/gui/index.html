@@ -8,22 +8,16 @@
 
 	<title>Emailator</title>
 
-	<link rel="shortcut icon" href="assets/images/favicon.png">
+	<link rel="shortcut icon" href="images/favicon.png">
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<!-- Custom styles for our template -->
-	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen">
-	<link rel="stylesheet" href="assets/css/main.css">
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+	<link rel="stylesheet" href="css/bootstrap-theme.css" media="screen">
+	<link rel="stylesheet" href="css/main.css">
 </head>
 
-<body class="home">
+<body class="home" data-ng-app="emailatorApp">
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom">
 		<div class="container">
@@ -38,15 +32,15 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="about.html">About</a></li>
+					<li class="active"><a href="#/home">Home</a></li>
+					<li><a href="#/about">About</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Services<b class="caret"></b></a>
+							data-toggle="dropdown">Services<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="sidebar-left.html">Email Extractor</a></li>
-							<li><a href="sidebar-left.html">Email Validator</a></li>
-							<li class="active"><a href="sidebar-right.html">Email Bulk Sender</a></li>
-							<li><a href="sidebar-left.html">Email Forwarder</a></li>
+							<li><a href="#/email-extratctor">Email Extractor</a></li>
+							<li><a href="#/email-validator">Email Validator</a></li>
+							<li><a href="#/email-bulk-sender">Email Bulk Sender</a></li>
+							<li><a href="#/email-forwarder">Email Forwarder</a></li>
 						</ul>
 					</li>
 					<li><a href="about.html">Pricing</a></li>
@@ -59,125 +53,8 @@
 	</div>
 	<!-- /.navbar -->
 
-	<!-- Header -->
-	<header id="head">
-		<div class="container">
-			<div class="row">
-				<h1 class="lead">awesome, simple, free</h1>
-				<p class="tagline">mailing campaigns management for the masses.</p>
-				<p>
-					<a class="btn btn-default btn-lg" role="button">MORE INFO</a> 
-					<a class="btn btn-action btn-lg" role="button">GET STARTED</a>
-				</p>
-			</div>
-		</div>
-	</header>
-	<!-- /Header -->
-
-	<!-- Intro -->
-	<div class="container text-center">
-		<br> <br>
-		<h2 class="thin">Manage your mailing campaigns flawlessly</h2>
-		<p class="text-muted">
-			We provide you with is a set of web-based tools that will simplify your mailing campaigns.<br />
-			By lifting the hassles of extra work, and helping you with just the right services. 
-		</p>
-	</div>
-	<!-- /Intro-->
-
-	<!-- Highlights - jumbotron -->
-	<div class="jumbotron top-space">
-		<div class="container">
-			<h3 class="text-center thin">Tools</h3>
-			<div class="row">
-				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption">
-						<h4>
-							<i class="fa fa-at fa-5"></i>Email Extractor
-						</h4>
-					</div>
-					<div class="h-body text-center">
-						<p>Extract email addresses from text, Office and image files.<br/>
-							(Coming Soon)</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption">
-						<h4>
-							<i class="fa fa-check fa-5"></i>Email Validator
-						</h4>
-					</div>
-					<div class="h-body text-center">
-						<p>Validate email addresses, check if they exist and work.<br/>
-							(Coming Soon)</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption">
-						<h4>
-							<i class="fa fa-envelope fa-5"></i>Email Bulk Sender
-						</h4>
-					</div>
-					<div class="h-body text-center">
-						<p>Send the same email to many addresses separately and
-							instantly.</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption">
-						<h4>
-							<i class="fa fa-share fa-5"></i>Email Forwarder
-						</h4>
-					</div>
-					<div class="h-body text-center">
-						<p>Forward received emails from your account to your email address.<br/>
-							(Coming Soon)</p>
-					</div>
-				</div>
-			</div>
-			<!-- /row  -->
-
-		</div>
-	</div>
-	<!-- /Highlights -->
-
-	<!-- container -->
-	<div class="container">
-		<h2 class="text-center top-space">Frequently Asked Questions</h2>
-		<br>
-		<div class="row">
-			<div class="col-sm-6">
-				<h3>Are the services free?</h3>
-				<p>Totally! There are no fees whatsoever.</p>
-			</div>
-			<div class="col-sm-6">
-				<h3>How many requests are supported?</h3>
-				<p>For equity of access, we allow 100 request per user per day.</p>
-			</div>
-		</div>
-		<!-- /row -->
-		<div class="row">
-			<div class="col-sm-6">
-				<h3>What about the "Coming Soon" services?</h3>
-				<p>They are services that we are planning to release in the
-					future, but not yet developed.</p>
-			</div>
-			<div class="col-sm-6">
-				<h3>Can I contribute to this project?</h3>
-				<p>Absolutely! Hit me via the Contact page.</p>
-			</div>
-		</div>
-		<!-- /row -->
-		
-		<div class="jumbotron top-space">
-			<h4>Emailator is a free service for now, we may be including
-				premium plans for enterprises in the future.</h4>
-			<p class="text-right">
-				<a class="btn btn-primary btn-large">Learn more »</a>
-			</p>
-		</div>
-	</div>
-	<!-- /container -->
+	<!-- Angular placeholder for dynamic content-->
+	<div data-ng-view class="view-frame"></div>
 
 
 	<footer id="footer" class="top-space">
@@ -212,7 +89,6 @@
 							<p>Any contribution is appreciated. Feel free to contact me!</p>
 						</div>
 					</div>
-
 				</div>
 				<!-- /row of widgets -->
 			</div>
@@ -224,11 +100,10 @@
 					<div class="col-md-6 widget">
 						<div class="widget-body">
 							<p class="simplenav">
-								<a href="#">Home</a> | 
-								<a href="about.html">About</a> | 
-								<a href="sidebar-right.html">Services</a> | 
-								<a href="contact.html">Contact</a> | 
-								<b><a href="signup.html">Sign up</a></b>
+								<a href="#/home">Home</a> | 
+								<a href="#/about">About</a> |  
+								<a href="#/contact">Contact</a> | 
+								<b><a href="#/signup">Sign up</a></b>
 							</p>
 						</div>
 					</div>
@@ -240,7 +115,6 @@
 							</p>
 						</div>
 					</div>
-
 				</div>
 				<!-- /row of widgets -->
 			</div>
@@ -249,10 +123,15 @@
 
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src="assets/js/headroom.min.js"></script>
-	<script src="assets/js/jQuery.headroom.min.js"></script>
-	<script src="assets/js/template.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.3/headroom.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.3/jQuery.headroom.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+	<!-- Custom JS for our app -->
+	<script src="js/template.js"></script>
+	<script src="js/app/app.js"></script>
+	<script src="js/app/controller/main-controller.js"></script>
 </body>
 </html>
