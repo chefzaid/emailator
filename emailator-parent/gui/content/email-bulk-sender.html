@@ -1,0 +1,90 @@
+<header id="head" class="secondary"></header>
+
+<!-- container -->
+<div class="container">
+
+	<ol class="breadcrumb">
+		<li><a href="#/email-extractor">Email Extractor</a></li>
+		<li><a href="#/email-validator">Email Validator</a></li>
+		<li class="active">Email Bulk Sender</li>
+		<li><a href="#/email-forwarder">Email Forwarder</a></li>
+	</ol>
+
+	<div class="row">
+		<!-- Article main content -->
+		<article class="col-sm-12 maincontent">
+			<header class="page-header">
+				<h1 class="page-title">Email Bulk Sender</h1>
+			</header>
+			
+			<p>
+				To send a bulk email, fill in the following fields.
+			</p>
+			<br>
+				<form>
+					<h4>Email</h4>
+					<hr>
+					<div class="row">
+						<div class="col-sm-6">
+							<input class="form-control" type="text" placeholder="From">
+						</div>
+						<div class="col-sm-6">
+							<input class="form-control" type="text" placeholder="Subject">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-6">
+							<textarea placeholder="List of email addresses to send to, one per line" class="form-control" rows="9"></textarea>
+						</div>
+						<div class="col-sm-6">
+							<textarea placeholder="Type your message here..." class="form-control" rows="9"></textarea>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-6">
+							<input class="form-control" type="file">
+						</div>
+						<div class="col-sm-6">
+							<input class="form-control" type="file">
+						</div>
+					</div>
+					<br>
+					
+					<h4>SMTP Configuration</h4>
+					<hr>
+					<div class="row">
+						<div class="col-sm-4">
+							<input class="form-control" type="text" placeholder="SMTP Server">
+						</div>
+						<div class="col-sm-4">
+							<input class="form-control" type="text" placeholder="Username">
+						</div>
+						<div class="col-sm-4">
+							<input class="form-control" type="password" placeholder="Password">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-4">
+							<input type="checkbox"> <label>Use Authentication</label>
+						</div>
+						<div class="col-sm-4">
+							<input type="checkbox"> <label>Use SSL</label>
+						</div>
+						<div class="col-sm-4">
+							<input type="checkbox"> <label>I accept the <a href="#/terms-services" target="_blank">terms and services</a>.</label>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-6 text-right">
+							<input class="btn btn-action" type="submit" value="Send message">
+						</div>
+					</div>
+				</form>
+		</article>
+		<!-- /Article -->
+	</div>
+</div>	<!-- /container -->

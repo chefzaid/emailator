@@ -19,7 +19,7 @@ public class TestValues {
 	private String smtpPassword;
 	@Value("${test.smtp.enableAuthentication}")
 	private Boolean smtpEnableAuthentication;
-	@Value("${test.smtp.EnableStartTls}")
+	@Value("${test.smtp.enableStartTls}")
 	private Boolean smtpEnableStartTls;
 
 	@Value("${test.email.address1}")
