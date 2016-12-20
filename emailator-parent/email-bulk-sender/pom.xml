@@ -4,19 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>email-bulk-sender</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-
 	<name>email-bulk-sender</name>
 	<description>email-bulk-sender</description>
 
 	<parent>
 		<groupId>com.emailator</groupId>
 		<artifactId>emailator-parent</artifactId>
-		<version>{project.version}</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 
 	<properties>
+		<skipTests>true</skipTests>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<mail.version>1.4.6</mail.version>

@@ -19,12 +19,12 @@
 	</parent>
 
 	<modules>
-		<module>assembly</module>
+<!-- 		<module>assembly</module> -->
 		<module>gui</module>
 		<module>email-bulk-sender</module>
-		<module>email-validator</module>
-		<module>email-extractor</module>
-		<module>email-forwarder</module>
+<!-- 		<module>email-validator</module> -->
+<!-- 		<module>email-extractor</module> -->
+<!-- 		<module>email-forwarder</module> -->
 	</modules>
 
 </project>
